@@ -1,20 +1,20 @@
-abstract type AbstractFruit{𝒮} end
+abstract type AbstractFruit{𝒯} end
 abstract type AbstractFruitCombo end
 
 import Base: +, *, /, -
 import LinearAlgebra: ⋅
+
+# A tuple of fruits (fruitbowl)
+struct Fruple{N, 𝒯} <: AbstractFruitCombo
+    fruits::NTuple{N, AbstractFruit{𝒯}}
+end
 
 struct Smoothie{𝒯, N} <: AbstractFruit{𝒯}
     fruits::NTuple{N, AbstractFruit{𝒯}}
 end
 
 function *(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
-    return Smoothie{N, 𝒯}((🍎, 🍌))
-end
-
-# A tuple of fruits
-struct Fruple{N, 𝒯} <: AbstractFruitCombo
-    fruits::NTuple{N, AbstractFruit{𝒯}}
+    return Smoothie{𝒯, N}((🍎, 🍌))
 end
 
 function +(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
