@@ -14,7 +14,7 @@ struct Smoothie{𝒯, N} <: AbstractFruit{𝒯}
 end
 
 function *(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
-    return Smoothie{𝒯, N}((🍎, 🍌))
+    return Smoothie{𝒯, 2}((🍎, 🍌))
 end
 
 function +(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
