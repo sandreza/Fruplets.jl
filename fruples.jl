@@ -1,5 +1,6 @@
 abstract type AbstractFruit{𝒯} end
 abstract type AbstractFruitCombo end
+abstract type AbstractFruitSignature end
 
 import Base: +, *, /, -
 import LinearAlgebra: ⋅
