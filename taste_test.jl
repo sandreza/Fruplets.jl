@@ -30,7 +30,7 @@ fruit_bowl = 🍌 + fruit_bowl
 # Test 2: Irreconcilable Differences
 🍎 = Apple(NotAmazing(), false, true, false)
 🍌 = Banana(Amazing(), true, true, true, true)
-# 🍎🍌 = 🍎+🍌
+🍐 = 🍎+🍌
 
 # Test 3:
 🍎 = Apple(NotAmazing(), false, true, false)
@@ -46,9 +46,16 @@ good_fruit_bowl = 🍏🍌 + 🍏🍌
 not_good_fruit_bowl = 🍎🍎 + 🍎🍎
 good_fruit_bowl += good_fruit_bowl
 
-# Should not work
-# not_good_fruit_bowl + good_fruit_bowl
+
 
 # Test 4: Smoothies
 🍌 = Banana(Amazing(), true, true, true, true)
 🍹 = 🍌*🍌
+
+# Negative Tests
+
+# Test 1
+🍐 + 🍏
+
+# Test 2
+total_bowl  = not_good_fruit_bowl + good_fruit_bowl

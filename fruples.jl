@@ -14,12 +14,20 @@ struct Smoothie{𝒯, N} <: AbstractFruit{𝒯}
     fruits::NTuple{N, AbstractFruit{𝒯}}
 end
 
+struct Pear{𝒯, 𝒮} <: AbstractFruitCombo
+    fruits::Tuple{AbstractFruit{𝒯}, AbstractFruit{𝒮}}
+end
+
 function *(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
     return Smoothie{𝒯, 2}((🍎, 🍌))
 end
 
 function +(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒯}) where 𝒯
     return Fruple{2, 𝒯}((🍎,🍌))
+end
+
+function +(🍎::AbstractFruit{𝒯}, 🍌::AbstractFruit{𝒮}) where {𝒯,𝒮}
+    return Pear{𝒯, 𝒮}((🍎,🍌))
 end
 
 function +(🍎🍎::Fruple{N, 𝒯}, 🍌🍌::Fruple{M, 𝒯}) where {N, M, 𝒯}
