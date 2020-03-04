@@ -1,17 +1,23 @@
 include("fruples.jl")
+# Behold the power of fruples
 
+# Abstract Types
 abstract type TimeScale end
-abstract type AbstractOcean end
+abstract type AbstractPlanet end
 abstract type AbstractBoundaryCondition end
 abstract type AbstractBoundary end
-abstract type AbstractBoundaryPair end
+abstract type AbstractOperator end
 
+# Boundaries
 struct OceanFloor   <: AbstractFruit{AbstractBoundary} end
 struct CoastLine    <: AbstractFruit{AbstractBoundary} end
 struct OceanSurface <: AbstractFruit{AbstractBoundary} end
 
+# Type of Ocean
+struct AbstractOcean <: AbstractPlanet
 struct AquaOcean <: AbstractOcean end
 
+# Timescales
 struct Slow{𝒮} <: TimeScale
     rate::𝒮
 end
@@ -20,12 +26,12 @@ struct Fast{𝒮} <: TimeScale
     rate::𝒮
 end
 
+# Boundary Conditions
 struct NoSlip <: AbstractFruit{AbstractBoundaryCondition} end
 struct FreeSlip <: AbstractFruit{AbstractBoundaryCondition} end
 struct Wave <: AbstractFruit{AbstractBoundaryCondition} end
 
-
-
+# Field Signature
 struct Signature{𝒮, 𝒯, 𝒰, 𝒱} <: AbstractFruitSignature
     time_scale::𝒮
     domain_space::𝒯
@@ -33,16 +39,29 @@ struct Signature{𝒮, 𝒯, 𝒰, 𝒱} <: AbstractFruitSignature
     model::𝒱
 end
 
+# Field Definition
 struct Field{𝒯, 𝒮, 𝒰} <: AbstractFruit{𝒯}
     signature::𝒯
     state::𝒮
     boundary_condition::𝒰
 end
 
+# Boundary Struct
 struct Boundary{𝒯} <: AbstractFruit{𝒯}
     bc::𝒯
 end
 
+# Operators
+struct AbstractGradient <: AbstractFruit{AbstractOperator}
+struct AbstractIntegral <: AbstractFruit{AbstractOperator}
+
+struct Gradient{𝒯} <: AbstractGradient
+    label::𝒯
+end
+
+struct Integral{𝒯} <: AbstractIntegral
+    label::𝒯
+end
 
 signature = Signature(Slow(0.1), 3, 3, AquaOcean())
 

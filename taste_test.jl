@@ -1,4 +1,5 @@
 include("fruples.jl")
+using Test
 
 struct Apple{𝒯, 𝒮, 𝒰, 𝒱} <: AbstractFruit{𝒯}
     nutritional_information::𝒯
@@ -46,16 +47,14 @@ good_fruit_bowl = 🍏🍌 + 🍏🍌
 not_good_fruit_bowl = 🍎🍎 + 🍎🍎
 good_fruit_bowl += good_fruit_bowl
 
-
-
 # Test 4: Smoothies
 🍌 = Banana(Amazing(), true, true, true, true)
-🍹 = 🍌*🍌
+@test 🍹 = 🍌*🍌
 
 # Negative Tests
 
 # Test 1
-🍐 + 🍏
+@test_throws MethodError 🍐 + 🍏
 
 # Test 2
-total_bowl  = not_good_fruit_bowl + good_fruit_bowl
+@test_throws MethodError total_bowl  = not_good_fruit_bowl + good_fruit_bowl
